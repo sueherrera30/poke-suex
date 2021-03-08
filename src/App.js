@@ -12,7 +12,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/pokemon' component={Details} />
+          <Route exact path='/pokemon/:id' component={Details} />
         </Switch>
       </Layout>
       </BrowserRouter>
