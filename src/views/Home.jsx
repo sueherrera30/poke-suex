@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch'; 
 
 const Home = () => {
-  const pokeApi = 'https://pokeapi.co/api/v2/pokemon?offset=110&limit=5';
+  const pokeApi = 'https://pokeapi.co/api/v2/pokemon?offset=1&limit=500';
   const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
   const fetchedPokemons = useFetch(pokeApi, {});
   const [searchPokemon, setSearchPokemon] = useState('');
