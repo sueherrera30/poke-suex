@@ -12,7 +12,6 @@ const Details = () => {
     const pokemonData = useFetch(url, {});
     
     const { response } = pokemonData;
-    console.log('responseee',response);
     if (!response) {
         return <p>Sorry I couldn't find it :(</p>
       }
