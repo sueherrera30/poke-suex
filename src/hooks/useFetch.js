@@ -16,7 +16,7 @@ const useFetch = (url, options) => {
             } catch {
                 setError(error);
                 (   <>
-                        <h1>Sorry, I'm broke, internet is having anxiety</h1>
+                        <h1>Sorry, I'm broken, internet is having anxiety</h1>
                         <img alt="img" src='../../assets/cheems.png' />
                     </>
                 )

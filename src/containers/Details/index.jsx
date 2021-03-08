@@ -15,7 +15,7 @@ const Details = () => {
     const { response } = pokemonData;
     if (!response) {
         return <>
-        <h1>Sorry, I'm broke, internet is having anxiety</h1>
+        <h1>Sorry, I'm broken, internet is having anxiety</h1>
         <img alt="img" src={chemsImg} />
         <Link to="/">
              BACK
