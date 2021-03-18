@@ -1,29 +1,34 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
-    display: flex;
     width: 100%;
+    min-height: 100%;
     height: auto;
-    min-height: 100vh;
-    background: lightcyan;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    position: relative;
 `;
 const Header = styled.div`
     display: flex;
     width: 100%;
-    height: 100px;
-    background: papayawhip;
+    // height: 80px;
+    background: transparent;
 `;
+const Content = styled.div`
+    height: 100vh;
+    background: rgb(64,58,58);
+    background: linear-gradient(180deg, rgba(64,58,58,1) 3%, rgba(85,110,121,0.9626225490196079) 67%);
+`;
+
 const Footer = styled.div`
-    display: flex;
     width: 100%;
-    height: 40px;
+    // height: 60px;
     background: white;
+    position: absolute;
+    bottom: 0;
+    background: transparent;
+
 `;
 
 export {
     Container, Header,
-    Footer,
+    Footer, Content,
 };

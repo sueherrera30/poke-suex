@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Header, Footer
+import { Container, Header, Footer, Content,
  } from '../Layout/components';
 
 const Layout = ({ children }) => {
@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
         <Header>
             holi header
         </Header>
-        <div>{children}</div>
+        <Content>{children}</Content>
         <Footer>
             by footer
         </Footer>
