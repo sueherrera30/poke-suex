@@ -10,16 +10,30 @@ const Container = styled.div`
 const MainContainer = styled.div`
     display: flex;
     width: 60%;
+    height: 100%;
+    min-height: calc(100vh - 290px);
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     position: relative;
 `;
+const ErrorContainer = styled.h1`
+    color: #f3d67b;
+    font-size: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    font-family: 'DotGothic16', sans-serif;
+`;
+
 const NameContainer = styled.div`
     min-width: 30%;
     width: auto;
     height: 80px;
-    background: #403a3a;
+    background: #536066;
     display: flex;
     justify-content: center;
     position: relative;
@@ -35,6 +49,11 @@ const Name = styled.p`
     font-size: 40px;
     padding: 8px;
     margin: 0;
+    text-transform: Capitalize;
+    @media screen and (max-width: 320px) {
+        font-size: 30px;
+        padding: 4px;
+    }
 `;
 const IconContainer = styled.div`
     width: 60px;
@@ -44,6 +63,11 @@ const IconContainer = styled.div`
     top: 45px;
     right: -35px;
     transform: rotate(45deg);
+    @media screen and (max-width: 320px) {
+        width: 50px;
+        height: 50px;
+        right: -20px;
+    }
 `;
 const Icon = styled.img`
     width: 100%;
@@ -53,7 +77,7 @@ const InfoContainer = styled.div`
     display: flex;
     width: 40%;
     background: lightgray;
-    border: 40px solid #BE0001;
+    border: 40px solid #ee5564;
     border-radius: 20px;
     flex-direction: column;
     align-items: center;
@@ -85,17 +109,30 @@ const Information = styled.li`
     letter-spacing: 1.5px;
     font-family: 'Quicksand', sans-serif;
 `;
+const Text = styled.p`
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    color: #ee5564;
+    font-weight: 600;
+    width: 50%
+`;
 const ImgSpriteContainer = styled.div`
     
 `;
 const ImgSprite = styled.img`
     width: 100px;
     height: 100px;
+    @media screen and (max-width: 320px) {
+        height: 80px;
+        width: 80px;
+    }
 `;
 const MainImgContainer = styled.div`
     width: 160px;
     height: 160px;
-    border: 40px solid #BE0001;
+    border: 40px solid #ee5564;
     border-radius: 50%;
     position: absolute;
     bottom: 2px;
@@ -143,6 +180,9 @@ const DecorationGameContainer = styled.div`
             left: 55px;
             width: 150px;
       }
+      @media screen and (max-width: 320px) {
+        left: 25px;
+    }
 `;
 const MainImg = styled.img`
     width: calc(100% - 20px);
@@ -155,5 +195,5 @@ export {
     TitleInfo, Information,
     DecorationGameContainer,
     ImgSpriteContainer, ImgSprite, MainImgContainer,
-    MainImg,
+    MainImg, Text, ErrorContainer,
 };

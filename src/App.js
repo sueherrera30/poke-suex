@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Home from './views/Home'
-import Details from './containers/Details'
-import Favorites from './containers/Favorites'
+import Home from './views/Home/index'
+import Details from './views/Details'
+import Favorites from './views/Favorites'
 import Layout from './containers/Layout'
 
 function App() {
