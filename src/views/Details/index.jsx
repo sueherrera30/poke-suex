@@ -5,7 +5,7 @@ import {
     Icon, InfoContainer, TitleInfo, Information, Container,
     MainImgContainer, MainImg,DecorationGameContainer,
     ImgSpriteContainer, ImgSprite, InformationList, Text,
-    ErrorContainer,
+    ErrorContainer, LittleImg, stylesLink,
 } from './components';
 
 import useFetch from '../../hooks/useFetch'; 
@@ -17,6 +17,7 @@ const Details = () => {
     const chemsImg = '../../../assets/cheems.png';
     const pokeImg = '../../../assets/pokedex.png';
     const pikachu = '../../../assets/pika2.png';
+    const jigglypuff = '../../../assets/jigglypuff.png';
 
     const pokemon = `${urlImg}/${id}.png`
     
@@ -25,8 +26,9 @@ const Details = () => {
     const { response } = pokemonData;
     return (
     <>
-        <Link to="/">
-        BACK
+        <Link to="/" style={stylesLink}>
+            <p>BACK</p>
+            <LittleImg alt="back icon" src={jigglypuff}/>
         </Link>
         <Container>
         {

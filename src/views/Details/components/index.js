@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+const stylesLink = {
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: '600',
+    letterSpacing: '5px',
+    fontFamily: 'DotGothic16, sans-serif',
+    margin: '0 16px',
+};
+
 const Container = styled.div`   
     display: flex;
     height: 100%;
@@ -27,6 +40,12 @@ const ErrorContainer = styled.h1`
     align-items: center;
     text-transform: capitalize;
     font-family: 'DotGothic16', sans-serif;
+    height: 100vh;
+`;
+const LittleImg = styled.img`
+    width: 35px;
+    height: 35px;
+    margin: 0 8px;
 `;
 
 const NameContainer = styled.div`
@@ -203,8 +222,8 @@ export {
     MainContainer, NameContainer,
     IconContainer,Name, Container,
     Icon, InfoContainer,InformationList,
-    TitleInfo, Information,
+    TitleInfo, Information, LittleImg,
     DecorationGameContainer,
     ImgSpriteContainer, ImgSprite, MainImgContainer,
-    MainImg, Text, ErrorContainer,
+    MainImg, Text, ErrorContainer, stylesLink,
 };

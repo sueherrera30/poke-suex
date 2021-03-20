@@ -62,10 +62,10 @@ const Home = () => {
               return (
                 <PokemonContainer key={pokemonId}>
                   <Link to={`/pokemon/${pokemonId}`}>
-                    <Name>{pokemon.name}</Name>
                     <PokemonImgContainer>
                       <PokemonImg alt="img" src={`${urlImg}/${pokemonId}.png`} />
                     </PokemonImgContainer>
+                    <Name>{pokemon.name}</Name>
                   </Link>   
                 </PokemonContainer>
               )  

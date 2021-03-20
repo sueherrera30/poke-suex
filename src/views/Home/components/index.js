@@ -7,6 +7,7 @@ const MainContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    padding: 64px;
 `;
 
 const PokemonContainer = styled.div`
@@ -31,6 +32,10 @@ const PokemonImgContainer = styled.div`
     width: 250px;
     height: 250px;
     object-fit: contain;
+    background: #F3D68B;
+    border-radius: 50%;
+    padding: 20px;
+    border: 10px solid #ee5564;
     @media screen and (max-width: 320px) {
         width: 180px;
         height: 180px;
@@ -50,9 +55,9 @@ const Pokeball = styled.img`
 const Name= styled.p`
     text-transform: uppercase;
     color: white;
-    font-size: 16px;
+    font-size: 26px;
     font-weight: 600;
-    margin: 8px;
+    margin: 20px;
     letter-spacing: 5px;
     font-family: 'DotGothic16', sans-serif;
 `;
