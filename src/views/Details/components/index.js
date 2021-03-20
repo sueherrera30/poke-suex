@@ -35,11 +35,10 @@ const NameContainer = styled.div`
     height: 80px;
     background: #536066;
     display: flex;
+    top: 24px;
     justify-content: center;
     position: relative;
-    top: 24px;
     z-index: 999;
-
 `;
 const Name = styled.p` 
     display: flex;
@@ -118,9 +117,7 @@ const Text = styled.p`
     font-weight: 600;
     width: 50%
 `;
-const ImgSpriteContainer = styled.div`
-    
-`;
+
 const ImgSprite = styled.img`
     width: 100px;
     height: 100px;
@@ -129,6 +126,10 @@ const ImgSprite = styled.img`
         width: 80px;
     }
 `;
+const ImgSpriteContainer = styled.div`
+    display: flex;
+`;
+
 const MainImgContainer = styled.div`
     width: 160px;
     height: 160px;
@@ -136,12 +137,17 @@ const MainImgContainer = styled.div`
     border-radius: 50%;
     position: absolute;
     bottom: 2px;
-    right: 16px;
     transform: rotate(20deg);
     display: flex;
     justify-content: center;
     align-items: center;
     background: lightgray;
+    @media screen and (max-width: 2560px) {
+        right: 185px;
+    } 
+    @media screen and (max-width: 1440px) {
+        right: 0px;
+    }
     @media screen and (max-width: 1024px) {
         width: 100px;
         height: 100px;
@@ -158,14 +164,19 @@ const DecorationGameContainer = styled.div`
     height: 160px;
     position: absolute;
     bottom: 100px;
-    left: 29px;
     transform: rotate(270deg);
     display: flex;
     justify-content: center;
     align-items: center;
+    @media screen and (max-width: 2560px) {
+        left: 154px;
+    }
+    @media screen and (max-width: 1440px) {
+        left: 29px;
+    }
     @media screen and (max-width: 1024px) {
         left: -107px;
-      }
+    }
       @media screen and (max-width: 768px) {
         left: -137px;
       }

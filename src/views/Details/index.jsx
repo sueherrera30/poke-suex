@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useParams, Link } from 'react-router-dom';
 import { 
     MainContainer, NameContainer, IconContainer,Name,
@@ -92,7 +91,4 @@ const Details = () => {
   );
 }
 
-Details.propTypes = {
-    // informationUrl: PropTypes.string.isRequired
-  };
 export default Details;
