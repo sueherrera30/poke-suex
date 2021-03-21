@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -15,36 +15,77 @@ const Home = () => {
   const pokeBall = '../../../assets/pokebola.png';
   const chemsImg = '../../../assets/cheems.png';
 
-  
   const [searchPokemon, setSearchPokemon] = useState('');
-  let currentPokemons;
   const perPage = 9;
   const fetchedPokemons = useFetch(pokeApi, {});
+  let currentPokemons;
+
+  const reducer = (state, action) => {
+    switch(action.type){
+      case 'START':
+        return {...state,
+          loading: true,
+        }
+      case 'LOADED':
+         return {...state,  ...action.payload}
+      default: 
+        throw new Error('internet is broken')
+    }
+  }
+  
+  const [state, dispatch ] = useReducer(reducer, {
+    loading: false,
+    more: true,
+    data: [],
+    after: perPage,
+  })
+
+  const { data, loading, after, more } = state;
+
 
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
         <ErrorContainer>
-          <h1>Internet is having anxiety</h1>
+          Internet is having anxiety
           <img alt="img" src={chemsImg} />
         </ErrorContainer>
       </MainContainer>
     )
   }
-
   const { results: pokemons } = fetchedPokemons.response;
+  
+  currentPokemons = pokemons.slice( 0, perPage);
 
-  currentPokemons = pokemons.slice(0, perPage);
+  const handleMorePokemons = () => {
+    dispatch({ type: 'START'})
+    setTimeout(() => {
+      const newLoadedPokemons = pokemons.slice(after, after + perPage);
+      const currentLoadedPokemons = [...currentPokemons, ...newLoadedPokemons]
+      dispatch({
+        type: 'LOADED',
+        payload: {
+          loading: false,
+          data: currentLoadedPokemons,
+          more: newLoadedPokemons.length === perPage,
+          after: state.after + currentLoadedPokemons.length,
+        }
+      });
+    }, 1000);
+  };
+
+  console.log('state', state);
 
   const searchResults = !searchPokemon
-    ? currentPokemons
+    ? data
     : pokemons.filter(pokemon =>
       pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase()))
   
-
+    
   const handleSerchingPokemon = event => {
     setSearchPokemon(event.target.value);
   };
+
 
   return (
     <>
@@ -77,6 +118,13 @@ const Home = () => {
               )  
             })
           }
+          {
+             loading && <p>L O A D I N G more little pokemons! </p>
+          }
+          {
+            (!loading && more) && <button onClick={handleMorePokemons}>Load more pokemons</button>
+          }
+          
       </MainContainer>
     </>
   );
