@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, createContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -16,16 +16,15 @@ const Home = () => {
   const chemsImg = '../../../assets/cheems.png';
 
   const [searchPokemon, setSearchPokemon] = useState('');
-  const perPage = 9;
+  const perPage = 6;
   const fetchedPokemons = useFetch(pokeApi, {});
   let currentPokemons;
 
+  
   const reducer = (state, action) => {
     switch(action.type){
       case 'START':
-        return {...state,
-          loading: true,
-        }
+      return {...state,  ...action.payload}
       case 'LOADED':
          return {...state,  ...action.payload}
       default: 
@@ -42,7 +41,19 @@ const Home = () => {
 
   const { data, loading, after, more } = state;
 
+//   const { results: pokemons } = fetchedPokemons.response;
+//   currentPokemons = pokemons.slice( 0, perPage);
 
+//   useEffect(() => {
+//     dispatch({
+//       type: 'START',
+//       payload: {
+//         ...state,
+//         data: currentPokemons,
+//       },
+//     });
+//  }, []);
+ 
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
@@ -53,12 +64,29 @@ const Home = () => {
       </MainContainer>
     )
   }
+
   const { results: pokemons } = fetchedPokemons.response;
-  
   currentPokemons = pokemons.slice( 0, perPage);
 
+//   useEffect(() => {
+//     dispatch({
+//       type: 'START',
+//       payload: {
+//         ...state,
+//         data: currentPokemons,
+//       },
+//     });
+//  }, []);
+
+
   const handleMorePokemons = () => {
-    dispatch({ type: 'START'})
+    dispatch({
+      type: 'START',
+      payload: {
+        ...state,
+        loading: true,
+      },
+    })
     setTimeout(() => {
       const newLoadedPokemons = pokemons.slice(after, after + perPage);
       const currentLoadedPokemons = [...currentPokemons, ...newLoadedPokemons]
@@ -73,8 +101,6 @@ const Home = () => {
       });
     }, 1000);
   };
-
-  console.log('state', state);
 
   const searchResults = !searchPokemon
     ? data

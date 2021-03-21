@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 
 const useFetch = (url, options) => {
     const [response, setResponse] = useState(null); 
@@ -15,15 +15,10 @@ const useFetch = (url, options) => {
                 setIsLoading(false);
             } catch {
                 setError(error);
-                (   <>
-                        <h1>Sorry, I'm broken, internet is having anxiety</h1>
-                        <img alt="img" src='../../assets/cheems.png' />
-                    </>
-                )
             }
         };
         fetchData();
-    }, []);
+    }, [error, options,url]);
     return { response, error, isLoading }
 };
 

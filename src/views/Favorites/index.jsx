@@ -7,7 +7,7 @@ import useFetch from '../../hooks/useFetch';
 const Favorites = () => {
     const { id } = useParams();
     const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-    const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+    //  const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
     const chemsImg = '../../../assets/cheems.png';
 
     const pokemonData = useFetch(url, {});
