@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -10,14 +10,16 @@ import {
 import useFetch from '../../hooks/useFetch'; 
 
 const Home = () => {
-  const pokeApi = 'https://pokeapi.co/api/v2/pokemon?offset=1&limit=200';
+  const pokeApi = 'https://pokeapi.co/api/v2/pokemon?offset=1&limit=500';
   const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
   const pokeBall = '../../../assets/pokebola.png';
   const chemsImg = '../../../assets/cheems.png';
 
-  const fetchedPokemons = useFetch(pokeApi, {});
+  
   const [searchPokemon, setSearchPokemon] = useState('');
-
+  let currentPokemons;
+  const perPage = 9;
+  const fetchedPokemons = useFetch(pokeApi, {});
 
   if (!fetchedPokemons.response) {
     return (
@@ -29,16 +31,20 @@ const Home = () => {
       </MainContainer>
     )
   }
+
   const { results: pokemons } = fetchedPokemons.response;
+
+  currentPokemons = pokemons.slice(0, perPage);
+
+  const searchResults = !searchPokemon
+    ? currentPokemons
+    : pokemons.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase()))
+  
 
   const handleSerchingPokemon = event => {
     setSearchPokemon(event.target.value);
   };
-
-  const searchResults = !searchPokemon
-    ? pokemons
-    : pokemons.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase()))
 
   return (
     <>

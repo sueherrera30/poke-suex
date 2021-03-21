@@ -29,16 +29,17 @@ const PokemonContainer = styled.div`
    }
 `;
 const PokemonImgContainer = styled.div`
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
     background: #F3D68B;
     border-radius: 50%;
     padding: 20px;
     border: 10px solid #ee5564;
-    @media screen and (max-width: 320px) {
+    @media screen and (max-width: 768px) {
         width: 180px;
         height: 180px;
+        padding: 0;
     }
 `;
 const PokemonImg = styled.img`
