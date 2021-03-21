@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect, createContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -8,6 +8,7 @@ import {
   Input, ErrorContainer,
 } from './components'
 import useFetch from '../../hooks/useFetch'; 
+import { Context } from '../../context/index';
 
 const Home = () => {
   const pokeApi = 'https://pokeapi.co/api/v2/pokemon?offset=1&limit=500';
@@ -20,40 +21,9 @@ const Home = () => {
   const fetchedPokemons = useFetch(pokeApi, {});
   let currentPokemons;
 
-  
-  const reducer = (state, action) => {
-    switch(action.type){
-      case 'START':
-      return {...state,  ...action.payload}
-      case 'LOADED':
-         return {...state,  ...action.payload}
-      default: 
-        throw new Error('internet is broken')
-    }
-  }
-  
-  const [state, dispatch ] = useReducer(reducer, {
-    loading: false,
-    more: true,
-    data: [],
-    after: perPage,
-  })
-
+  const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
 
-//   const { results: pokemons } = fetchedPokemons.response;
-//   currentPokemons = pokemons.slice( 0, perPage);
-
-//   useEffect(() => {
-//     dispatch({
-//       type: 'START',
-//       payload: {
-//         ...state,
-//         data: currentPokemons,
-//       },
-//     });
-//  }, []);
- 
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
@@ -77,7 +47,6 @@ const Home = () => {
 //       },
 //     });
 //  }, []);
-
 
   const handleMorePokemons = () => {
     dispatch({
