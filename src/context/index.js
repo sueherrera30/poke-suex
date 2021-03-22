@@ -5,7 +5,7 @@ const initialState = {
   more: true,
   data: [],
   after: 0,
-  favourites: null,
+  favourites: [],
 };
 
 const Context = createContext();

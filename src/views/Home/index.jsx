@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext} from 'react';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@material-ui/core';
 
@@ -7,7 +7,8 @@ import {
   PokemonImg, Name, PokemonContainer,
   SearchContainer, SearchText, Pokeball,
   Input, ErrorContainer, InfoContainer,
-  Favourite, FavButton,
+  Favourite, FavButton, LoaderContainer,
+  LoadingImg,
 } from './components'
 import useFetch from '../../hooks/useFetch'; 
 import { Context } from '../../context/index';
@@ -19,18 +20,49 @@ const Home = () => {
   const chemsImg = '../../../assets/cheems.png';
   const emptyHeart = '../../../assets/like.png';
   const heart = '../../../assets/heart.png'
+  const loadingTaquito = '../../../assets/eating.JPG'
 
   const [searchPokemon, setSearchPokemon] = useState('');
   const [favourites, setFavourite] = useState([]);
   const [favouriteHeartState, setFavouriteHeartState] = useState(false);
+  // const [element, setElement] = useState(null);
   const perPage = 6;
   const fetchedPokemons = useFetch(pokeApi, {});
   let currentPokemons;
+  
+  // const observer = useRef(
+  //   new IntersectionObserver(
+  //     entries => {
+  //       const first = entries[0];
+  //       if (first.isIntersecting) {
+  //         loader.current();
+  //       }
+  //     },
+  //     { threshold: 1 }
+  //   )
+  // );
 
   const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
 
-  
+
+  // const loader = useRef();
+
+  // useEffect(() => {
+  //   const currentElement = element;
+  //   const currentObserver = observer.current;
+
+  //   if (currentElement) {
+  //     currentObserver.observe(currentElement);
+  //   }
+
+  //   return () => {
+  //     if (currentElement) {
+  //       currentObserver.unobserve(currentElement);
+  //     }
+  //   };
+  // }, [element]);
+
   //   useEffect(() => {
   //     dispatch({
   //       type: 'START',
@@ -95,29 +127,32 @@ const Home = () => {
     setSearchPokemon(event.target.value);
   };
 
-  const handleFavourite = async (pokemonSelected) => {
+  const handleFavourite = (pokemonSelected) => {
     if(!favouriteHeartState) {
-      setFavouriteHeartState(true);
-      setFavourite([...favourites, pokemonSelected]);
-      await dispatch({
-        type: 'FAVOURITES',
-        payload: {
-        ...state,
-        favourites,
-        }
+      setFavouriteHeartState(true); 
+      setFavourite((prevState) => {
+        dispatch({
+          type: 'FAVOURITES',
+          payload: {
+          ...state,
+          favourites: [...state.favourites, pokemonSelected],
+          }
+        });
+        return [...prevState, {...state.favourites}];
       });
     } else {
       setFavouriteHeartState(false); 
       let savedFavourites = [...favourites];
       savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-      setFavourite(savedFavourites);
-
-      dispatch({
-        type: 'FAVOURITES',
-        payload: {
-        ...state,
-        favourites,
-        }
+      setFavourite((prevState) => {
+        dispatch({
+          type: 'FAVOURITES',
+          payload: {
+          ...state,
+          favourites: savedFavourites,
+          }
+        });
+        return [...prevState, {...state.favourites}]
       });
     }
     
@@ -166,12 +201,17 @@ const Home = () => {
             })
           }
           {
-             loading && <p>L O A D I N G more little pokemons! </p>
-          }
+             loading &&
+             <LoaderContainer>
+              <LoadingImg src={loadingTaquito} alt="taquito-image" />
+              <Name>Looking for more pokemons, take a taquito for a while... </Name>
+             </LoaderContainer>
+          }       
           {
-            (!loading && more) && <button onClick={handleMorePokemons}>Load more pokemons</button>
+            (!loading && more) && <LoaderContainer>
+            <button onClick={handleMorePokemons}>Load more pokemons</button>
+            </ LoaderContainer>
           }
-          
       </MainContainer>
     </>
   );

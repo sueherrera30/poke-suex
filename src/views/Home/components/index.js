@@ -59,7 +59,7 @@ const Pokeball = styled.img`
 const Name= styled.p`
     text-transform: uppercase;
     color: white;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 600;
     margin: 20px;
     letter-spacing: 5px;
@@ -137,10 +137,36 @@ const FavButton = styled.button`
    align-items: center;
    color: white;
 `;
+const LoaderContainer = styled.div`   
+    display: flex;
+    min-height: 150px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    & button {
+        font-family: 'DotGothic16', sans-serif;
+        text-transform: uppercase;
+        color: white;
+        fontSize: 30px;
+        padding: 8px;
+        letter-spacing: 5px;
+        background: transparent;
+    }
+`;
+
+const LoadingImg = styled.img`
+    width: 350px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 20px;
+`;
+
 
 export {
     MainContainer, PokemonImgContainer, PokemonImg,
     PokemonContainer, SearchContainer, SearchText,
     Name, Pokeball, Input, ErrorContainer, InfoContainer,
-    Favourite, FavButton,
+    Favourite, FavButton, LoaderContainer,
+    LoadingImg,
 };
