@@ -30,6 +30,17 @@ const Home = () => {
   const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
 
+  
+  //   useEffect(() => {
+  //     dispatch({
+  //       type: 'START',
+  //       payload: {
+  //         ...state,
+  //         data: currentPokemons,
+  //       },
+  //     });
+  //  }, []);
+
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
@@ -40,19 +51,16 @@ const Home = () => {
       </MainContainer>
     )
   }
+  // const { results: pokemons } = fetchedPokemons.response;
+  // try {
+  //   currentPokemons = pokemons.slice( 0, perPage);
+  // } 
+  // catch {
+  //   console.log('Error in catch')
+  // }
 
   const { results: pokemons } = fetchedPokemons.response;
   currentPokemons = pokemons.slice( 0, perPage);
-
-//   useEffect(() => {
-//     dispatch({
-//       type: 'START',
-//       payload: {
-//         ...state,
-//         data: currentPokemons,
-//       },
-//     });
-//  }, []);
 
   const handleMorePokemons = () => {
     dispatch({
