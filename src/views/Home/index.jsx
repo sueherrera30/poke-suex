@@ -87,11 +87,11 @@ const Home = () => {
     setSearchPokemon(event.target.value);
   };
 
-  const handleFavourite = (pokemonSelected) => {
+  const handleFavourite = async (pokemonSelected) => {
     if(!favouriteHeartState) {
       setFavouriteHeartState(true);
       setFavourite([...favourites, pokemonSelected]);
-      dispatch({
+      await dispatch({
         type: 'FAVOURITES',
         payload: {
         ...state,

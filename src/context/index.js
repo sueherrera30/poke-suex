@@ -4,7 +4,7 @@ const initialState = {
   loading: false,
   more: true,
   data: [],
-  after: 6,
+  after: 0,
   favourites: null,
 };
 
