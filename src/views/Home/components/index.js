@@ -12,8 +12,11 @@ const MainContainer = styled.div`
 
 const PokemonContainer = styled.div`
    width: calc(100%/3);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
     &:hover {
-        &  img {
+        & img {
             transform: rotate(20deg);
         }
     }
@@ -60,6 +63,7 @@ const Name= styled.p`
     font-weight: 600;
     margin: 20px;
     letter-spacing: 5px;
+    text-align: center;
     font-family: 'DotGothic16', sans-serif;
 `;
 
@@ -116,8 +120,27 @@ const Input = styled.input`
         color: #ee5564;
     }
 `;
+const InfoContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+const Favourite = styled.img`
+    width: 30px;
+    height: 30px;
+`;
+const FavButton = styled.button`
+   background: transparent;
+   border: none;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: white;
+`;
+
 export {
     MainContainer, PokemonImgContainer, PokemonImg,
     PokemonContainer, SearchContainer, SearchText,
-    Name, Pokeball, Input, ErrorContainer,
+    Name, Pokeball, Input, ErrorContainer, InfoContainer,
+    Favourite, FavButton,
 };

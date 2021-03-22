@@ -1,11 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Tooltip } from '@material-ui/core';
 
 import {
   MainContainer, PokemonImgContainer,
   PokemonImg, Name, PokemonContainer,
   SearchContainer, SearchText, Pokeball,
-  Input, ErrorContainer,
+  Input, ErrorContainer, InfoContainer,
+  Favourite, FavButton,
 } from './components'
 import useFetch from '../../hooks/useFetch'; 
 import { Context } from '../../context/index';
@@ -15,8 +17,12 @@ const Home = () => {
   const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
   const pokeBall = '../../../assets/pokebola.png';
   const chemsImg = '../../../assets/cheems.png';
+  const emptyHeart = '../../../assets/like.png';
+  const heart = '../../../assets/heart.png'
 
   const [searchPokemon, setSearchPokemon] = useState('');
+  const [favourites, setFavourite] = useState([]);
+  const [favouriteHeartState, setFavouriteHeartState] = useState(false);
   const perPage = 6;
   const fetchedPokemons = useFetch(pokeApi, {});
   let currentPokemons;
@@ -81,6 +87,33 @@ const Home = () => {
     setSearchPokemon(event.target.value);
   };
 
+  const handleFavourite = (pokemonSelected) => {
+    if(!favouriteHeartState) {
+      setFavouriteHeartState(true);
+      setFavourite([...favourites, pokemonSelected]);
+      dispatch({
+        type: 'FAVOURITES',
+        payload: {
+        ...state,
+        favourites,
+        }
+      });
+    } else {
+      setFavouriteHeartState(false); 
+      let savedFavourites = [...favourites];
+      savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+      setFavourite(savedFavourites);
+
+      dispatch({
+        type: 'FAVOURITES',
+        payload: {
+        ...state,
+        favourites,
+        }
+      });
+    }
+    
+  };
 
   return (
     <>
@@ -107,8 +140,19 @@ const Home = () => {
                     <PokemonImgContainer>
                       <PokemonImg alt="img" src={`${urlImg}/${pokemonId}.png`} />
                     </PokemonImgContainer>
-                    <Name>{pokemon.name}</Name>
-                  </Link>   
+                  </Link>
+                  <InfoContainer>
+                      <Name>{pokemon.name}</Name>
+                      <Tooltip title="ADD TO FAVS" arrow>
+                        <FavButton onClick={(e) => handleFavourite(pokemon)} name={pokemon.name}>
+                          {
+                            !favouriteHeartState 
+                            ? <Favourite alt="empty heart" src={emptyHeart} />
+                            :  <Favourite alt="heart" src={heart} />
+                          } 
+                        </FavButton>
+                      </Tooltip>
+                  </InfoContainer>   
                 </PokemonContainer>
               )  
             })
