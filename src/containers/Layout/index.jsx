@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Container, Header, Footer, NameLink,
@@ -12,6 +13,7 @@ const Layout = ({ children }) => {
   return (
     <Container>
         <Header>
+            <Link to='/favorites'>FAVS</Link>
             <Logo alt="logo" src={logo} />
         </Header>
         <Content>{children}</Content>

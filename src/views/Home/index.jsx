@@ -25,43 +25,14 @@ const Home = () => {
   const [searchPokemon, setSearchPokemon] = useState('');
   const [favourites, setFavourite] = useState([]);
   const [favouriteHeartState, setFavouriteHeartState] = useState(false);
-  // const [element, setElement] = useState(null);
+
   const perPage = 6;
   const fetchedPokemons = useFetch(pokeApi, {});
   let currentPokemons;
   
-  // const observer = useRef(
-  //   new IntersectionObserver(
-  //     entries => {
-  //       const first = entries[0];
-  //       if (first.isIntersecting) {
-  //         loader.current();
-  //       }
-  //     },
-  //     { threshold: 1 }
-  //   )
-  // );
-
   const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
 
-
-  // const loader = useRef();
-
-  // useEffect(() => {
-  //   const currentElement = element;
-  //   const currentObserver = observer.current;
-
-  //   if (currentElement) {
-  //     currentObserver.observe(currentElement);
-  //   }
-
-  //   return () => {
-  //     if (currentElement) {
-  //       currentObserver.unobserve(currentElement);
-  //     }
-  //   };
-  // }, [element]);
 
   //   useEffect(() => {
   //     dispatch({
@@ -154,8 +125,7 @@ const Home = () => {
         });
         return [...prevState, {...state.favourites}]
       });
-    }
-    
+    }   
   };
 
   return (
