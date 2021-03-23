@@ -24,7 +24,7 @@ const Home = () => {
 
   const [searchPokemon, setSearchPokemon] = useState('');
   const [favourites, setFavourite] = useState([]);
-  const [favouriteHeartState, setFavouriteHeartState] = useState(false);
+  const [swtichImage, setSwtichImage] = useState(false);
 
   const perPage = 6;
   const fetchedPokemons = useFetch(pokeApi, {});
@@ -54,13 +54,6 @@ const Home = () => {
       </MainContainer>
     )
   }
-  // const { results: pokemons } = fetchedPokemons.response;
-  // try {
-  //   currentPokemons = pokemons.slice( 0, perPage);
-  // } 
-  // catch {
-  //   console.log('Error in catch')
-  // }
 
   const { results: pokemons } = fetchedPokemons.response;
   currentPokemons = pokemons.slice( 0, perPage);
@@ -98,9 +91,9 @@ const Home = () => {
     setSearchPokemon(event.target.value);
   };
 
-  const handleFavourite = (pokemonSelected) => {
-    if(!favouriteHeartState) {
-      setFavouriteHeartState(true); 
+  const handleFavourite = (pokemonSelected, e) => {
+    if(!swtichImage) {
+      setSwtichImage(true); 
       setFavourite((prevState) => {
         dispatch({
           type: 'FAVOURITES',
@@ -112,7 +105,7 @@ const Home = () => {
         return [...prevState, {...state.favourites}];
       });
     } else {
-      setFavouriteHeartState(false); 
+      setSwtichImage(false); 
       let savedFavourites = [...favourites];
       savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
       setFavourite((prevState) => {
@@ -144,11 +137,11 @@ const Home = () => {
     </SearchContainer>
       <MainContainer>
           {
-            searchResults.map(pokemon => {
+            searchResults.map((pokemon, index) => {
               const splittedUrl = pokemon.url.split('/');
               const pokemonId = splittedUrl[splittedUrl.length - 2];
               return (
-                <PokemonContainer key={pokemonId}>
+                <PokemonContainer key={index}>
                   <Link to={`/pokemon/${pokemonId}`}>
                     <PokemonImgContainer>
                       <PokemonImg alt="img" src={`${urlImg}/${pokemonId}.png`} />
@@ -157,9 +150,9 @@ const Home = () => {
                   <InfoContainer>
                       <Name>{pokemon.name}</Name>
                       <Tooltip title="ADD TO FAVS" arrow>
-                        <FavButton onClick={(e) => handleFavourite(pokemon)} name={pokemon.name}>
+                        <FavButton onClick={(e) => handleFavourite(pokemon, e)} name={pokemon.name}>
                           {
-                            !favouriteHeartState 
+                            !swtichImage 
                             ? <Favourite alt="empty heart" src={emptyHeart} />
                             :  <Favourite alt="heart" src={heart} />
                           } 

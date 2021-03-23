@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Context } from '../../context/index';
 import { LittleImg, Container, stylesLink, MainContainer } from '../Details/components/index';
@@ -12,7 +12,6 @@ import {
 const jigglypuff = '../../../assets/jigglypuff.png';
 
 const Favorites = () => {
-    // const { id } = useParams();
     const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
     // const chemsImg = '../../../assets/cheems.png';
 
