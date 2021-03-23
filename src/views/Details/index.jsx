@@ -34,7 +34,7 @@ const Details = () => {
         {
             !response ? (
                 <ErrorContainer>
-                    <h1>Internet is having anxiety</h1>
+                    <h1>Internet has anxiety</h1>
                     <img alt="img" src={chemsImg} />
                 </ErrorContainer>
             ) : (

@@ -1,4 +1,4 @@
-import React, { useState, useContext} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@material-ui/core';
 
@@ -24,31 +24,35 @@ const Home = () => {
 
   const [searchPokemon, setSearchPokemon] = useState('');
   const [favourites, setFavourite] = useState([]);
+  // const [currentPokemons, setCurrentPokemons] = useState([]);
   const [swtichImage, setSwtichImage] = useState(false);
 
   const perPage = 6;
-  const fetchedPokemons = useFetch(pokeApi, {});
-  let currentPokemons;
+ 
   
   const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
 
 
-  //   useEffect(() => {
-  //     dispatch({
-  //       type: 'START',
-  //       payload: {
-  //         ...state,
-  //         data: currentPokemons,
-  //       },
-  //     });
-  //  }, []);
+
+  const fetchedPokemons = useFetch(pokeApi, {});
+
+
+  useEffect(() => {
+    dispatch({
+      type: 'START',
+      payload: {
+        ...state,
+        data: (fetchedPokemons?.response?.results || [] ).slice(0, perPage),
+      },
+    });
+ }, [fetchedPokemons.response]);
 
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
         <ErrorContainer>
-          Internet is having anxiety
+          Internet has anxiety - esto debe ser loading
           <img alt="img" src={chemsImg} />
         </ErrorContainer>
       </MainContainer>
@@ -56,7 +60,7 @@ const Home = () => {
   }
 
   const { results: pokemons } = fetchedPokemons.response;
-  currentPokemons = pokemons.slice( 0, perPage);
+  // setCurrentPokemons(pokemons.slice( 0, perPage));
 
   const handleMorePokemons = () => {
     dispatch({
@@ -68,7 +72,8 @@ const Home = () => {
     })
     setTimeout(() => {
       const newLoadedPokemons = pokemons.slice(after, after + perPage);
-      const currentLoadedPokemons = [...currentPokemons, ...newLoadedPokemons]
+      const currentLoadedPokemons = [...state.data, ...newLoadedPokemons]
+      console.log('currentLoadedPokemons', currentLoadedPokemons);
       dispatch({
         type: 'LOADED',
         payload: {
