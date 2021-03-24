@@ -13,7 +13,7 @@ const jigglypuff = '../../../assets/jigglypuff.png';
 
 const Favorites = () => {
     const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
-    // const chemsImg = '../../../assets/cheems.png';
+    // const chemsImg = '../../../assets/cheems.png';                             
 
     const { state } = useContext(Context);
     const { favourites } = state;
@@ -24,7 +24,6 @@ const Favorites = () => {
         <LittleImg alt="back icon" src={jigglypuff}/>
     </Link>
     <Container>
-        <Link to="/">favs</Link>  
         <MainContainer
           style={{
             flexDirection: 'row',
@@ -34,7 +33,7 @@ const Favorites = () => {
           }}
           >
         {
-          !favourites ? <p>Not favs, sorry!</p>
+          favourites.length === 0 ? <h1>Not favs yet, sorry!</h1>
           : favourites.map(pokemon => {
               const splittedUrl = pokemon.url.split('/');
               const pokemonId = splittedUrl[splittedUrl.length - 2];
@@ -60,7 +59,7 @@ const Favorites = () => {
                 </PokemonContainer>
               )  
             })
-          } */}
+          }
         </MainContainer> 
     </Container>
     </>

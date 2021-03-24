@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Container, Header, Footer, NameLink,
-    Content, Logo, FooterText, ImgFooter,
+    Content, Logo, FooterText, ImgFooter, FavsContainer,
  } from '../Layout/components';
 
 const Layout = ({ children }) => {
@@ -13,8 +13,11 @@ const Layout = ({ children }) => {
   return (
     <Container>
         <Header>
-            <Link to='/favorites'>FAVS</Link>
             <Logo alt="logo" src={logo} />
+            <FavsContainer>
+                <Link to='/favorites'>Favourites</Link>
+                <ImgFooter alt="heart" src={heart} /> 
+            </FavsContainer>
         </Header>
         <Content>{children}</Content>
         <Footer>
