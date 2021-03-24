@@ -60,7 +60,6 @@ const Home = () => {
   }
 
   const { results: pokemons } = fetchedPokemons.response;
-  // setCurrentPokemons(pokemons.slice( 0, perPage));
 
   const handleMorePokemons = () => {
     dispatch({
@@ -95,11 +94,41 @@ const Home = () => {
   const handleSerchingPokemon = event => {
     setSearchPokemon(event.target.value);
   };
+  // SAVED
+  // const handleFavourite = (pokemonSelected, e) => {
+  //   if(!swtichImage) {
+  //     setSwtichImage(true); 
+  //     setFavourite((prevState) => {
+  //       dispatch({
+  //         type: 'FAVOURITES',
+  //         payload: {
+  //         ...state,
+  //         favourites: [...state.favourites, pokemonSelected],
+  //         }
+  //       });
+  //       return [...prevState, {...state.favourites}];
+  //     });
+  //   } else {
+  //     setSwtichImage(false); 
+  //     let savedFavourites = [...favourites];
+  //     savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+  //     setFavourite((prevState) => {
+  //       dispatch({
+  //         type: 'FAVOURITES',
+  //         payload: {
+  //         ...state,
+  //         favourites: savedFavourites,
+  //         }
+  //       });
+  //       return [...prevState, {...state.favourites}]
+  //     });
+  //   }   
+  // };
 
-  const handleFavourite = (pokemonSelected, e) => {
+  const handleFavourite = (pokemonSelected) => {
     if(!swtichImage) {
-      setSwtichImage(true); 
-      setFavourite((prevState) => {
+    setSwtichImage(true)
+    setFavourite((prevState) => {
         dispatch({
           type: 'FAVOURITES',
           payload: {
@@ -107,23 +136,26 @@ const Home = () => {
           favourites: [...state.favourites, pokemonSelected],
           }
         });
-        return [...prevState, {...state.favourites}];
+        return [...prevState, {...state.favourites}];;
       });
-    } else {
-      setSwtichImage(false); 
-      let savedFavourites = [...favourites];
-      savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-      setFavourite((prevState) => {
-        dispatch({
-          type: 'FAVOURITES',
-          payload: {
-          ...state,
-          favourites: savedFavourites,
-          }
-        });
-        return [...prevState, {...state.favourites}]
-      });
-    }   
+      console.log('favs', state.favourites);
+      //state.favourites.filter(fav => fav.name === pokemonSelected.name ? setSwtichImage(true) : setSwtichImage(false)) 
+    }
+    // else {
+    //   setSwtichImage(false); 
+    //   let savedFavourites = [...favourites];
+    //   savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+    //   setFavourite((prevState) => {
+    //     dispatch({
+    //       type: 'FAVOURITES',
+    //       payload: {
+    //       ...state,
+    //       favourites: savedFavourites,
+    //       }
+    //     });
+    //     return [...prevState, {...state.favourites}]
+    //   });
+    // }   
   };
 
   return (
@@ -155,7 +187,15 @@ const Home = () => {
                   <InfoContainer>
                       <Name>{pokemon.name}</Name>
                       <Tooltip title="ADD TO FAVS" arrow>
-                        <FavButton onClick={(e) => handleFavourite(pokemon, e)} name={pokemon.name}>
+                        {/* SAVE  */}
+                        {/* <FavButton onClick={(e) => handleFavourite(pokemon, e)} name={pokemon.name}>
+                          {
+                            !swtichImage 
+                            ? <Favourite alt="empty heart" src={emptyHeart} />
+                            :  <Favourite alt="heart" src={heart} />
+                          } 
+                        </FavButton> */}
+                        <FavButton onClick={() => handleFavourite(pokemon)} name={pokemon.name}>
                           {
                             !swtichImage 
                             ? <Favourite alt="empty heart" src={emptyHeart} />
