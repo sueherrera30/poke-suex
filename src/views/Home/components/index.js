@@ -20,9 +20,7 @@ const PokemonContainer = styled.div`
             transform: rotate(20deg);
         }
     }
-   @media screen and (max-width: 425px) {
-    width: 100%;
-    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
    & > a {
     display: flex;
     flex-direction: column;
@@ -67,7 +65,7 @@ const Name= styled.p`
     font-family: 'DotGothic16', sans-serif;
 `;
 
-const ErrorContainer = styled.h1`
+const LoadingContainer = styled.h1`
     color: #f3d67b;
     font-size: 20px;
     width: 80%;
@@ -166,7 +164,7 @@ const LoadingImg = styled.img`
 export {
     MainContainer, PokemonImgContainer, PokemonImg,
     PokemonContainer, SearchContainer, SearchText,
-    Name, Pokeball, Input, ErrorContainer, InfoContainer,
+    Name, Pokeball, Input, LoadingContainer, InfoContainer,
     Favourite, FavButton, LoaderContainer,
     LoadingImg,
 };

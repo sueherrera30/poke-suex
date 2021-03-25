@@ -15,6 +15,37 @@ const Header = styled.div`
     position: relative;
     background: rgb(238,85,100);
     background: linear-gradient(180deg, rgba(238,85,100,1) 3%, rgba(64,58,58,1) 88%);
+    @media screen and (max-width: 425px) {
+        height: 300px;
+    }
+`;
+ const FavsContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    & > a {
+        text-decoration: unset;
+        color: #f3d67b;
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: capitalize;
+        font-family: 'Cedarville Cursive', cursive;
+        letter-spacing: 4px;
+        padding: 4px 10px;
+        &:hover {
+            font-size: 30px;
+            color: white;
+        }
+    }
+    @media screen and (max-width: 425px) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 100px 0px;
+    }
 `;
 
 const Logo = styled.img`
@@ -61,5 +92,5 @@ const NameLink = styled.a`
 `;
 export {
     Container, Header, FooterText, NameLink,
-    Footer, Content, Logo, ImgFooter,
+    Footer, Content, Logo, ImgFooter, FavsContainer,
 };

@@ -1,43 +1,29 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Tooltip } from '@material-ui/core';
 
 import {
-  MainContainer, PokemonImgContainer,
-  PokemonImg, Name, PokemonContainer,
-  SearchContainer, SearchText, Pokeball,
-  Input, ErrorContainer, InfoContainer,
-  Favourite, FavButton, LoaderContainer,
-  LoadingImg,
+  MainContainer, Name,SearchContainer,
+  SearchText, Pokeball, Input, LoadingContainer,
+  LoaderContainer,LoadingImg,
 } from './components'
+import PokemonCard from './components/PokemonCard';
 import useFetch from '../../hooks/useFetch'; 
 import { Context } from '../../context/index';
 
 const Home = () => {
   const pokeApi = 'https://pokeapi.co/api/v2/pokemon?offset=1&limit=500';
-  const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
   const pokeBall = '../../../assets/pokebola.png';
   const chemsImg = '../../../assets/cheems.png';
-  const emptyHeart = '../../../assets/like.png';
-  const heart = '../../../assets/heart.png'
   const loadingTaquito = '../../../assets/eating.JPG'
 
   const [searchPokemon, setSearchPokemon] = useState('');
   const [favourites, setFavourite] = useState([]);
-  // const [currentPokemons, setCurrentPokemons] = useState([]);
-  const [swtichImage, setSwtichImage] = useState(false);
-
-  const perPage = 6;
- 
-  
   const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
-
+  const perPage = 6; 
 
 
   const fetchedPokemons = useFetch(pokeApi, {});
-
-
+ 
   useEffect(() => {
     dispatch({
       type: 'START',
@@ -51,16 +37,15 @@ const Home = () => {
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
-        <ErrorContainer>
-          Internet has anxiety - esto debe ser loading
+        <LoadingContainer>
+          Internet has anxiety - this is loading
           <img alt="img" src={chemsImg} />
-        </ErrorContainer>
+        </LoadingContainer>
       </MainContainer>
     )
   }
 
   const { results: pokemons } = fetchedPokemons.response;
-  // setCurrentPokemons(pokemons.slice( 0, perPage));
 
   const handleMorePokemons = () => {
     dispatch({
@@ -95,22 +80,55 @@ const Home = () => {
   const handleSerchingPokemon = event => {
     setSearchPokemon(event.target.value);
   };
-
-  const handleFavourite = (pokemonSelected, e) => {
+  
+  // const handleFavourite = (pokemonSelected, setSwtichImage, swtichImage ) => {
+  //   if(!swtichImage) {
+  //     setSwtichImage(true);
+  //     setFavourite((prevState) => {
+  //       dispatch({
+  //         type: 'FAVOURITES',
+  //         payload: {
+  //         ...state,
+  //         favourites: [...state.favourites, pokemonSelected],
+  //         // favourites: state.favourites.includes(pokemonSelected) ? [...state.favourites] : [...state.favourites, pokemonSelected],
+  //         }
+  //       });
+  //       return [...prevState, {...state.favourites}];
+  //     });
+  //   } 
+  //   else {
+  //     setSwtichImage(false);
+  //     let savedFavourites = [...favourites];
+  //     savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+  //     setFavourite((prevState) => {
+  //       dispatch({
+  //         type: 'FAVOURITES',
+  //         payload: {
+  //         ...state,
+  //         favourites: savedFavourites,
+  //         }
+  //       });
+  //       return [...prevState, {...state.favourites}]
+  //     });
+  //   }   
+  // };
+  const handleFavourite = (pokemonSelected, setSwtichImage, swtichImage ) => {
     if(!swtichImage) {
-      setSwtichImage(true); 
+      setSwtichImage(true);
       setFavourite((prevState) => {
         dispatch({
           type: 'FAVOURITES',
           payload: {
           ...state,
           favourites: [...state.favourites, pokemonSelected],
+          // favourites: state.favourites.includes(pokemonSelected) ? [...state.favourites] : [...state.favourites, pokemonSelected],
           }
         });
         return [...prevState, {...state.favourites}];
       });
-    } else {
-      setSwtichImage(false); 
+    } 
+    else {
+      setSwtichImage(false);
       let savedFavourites = [...favourites];
       savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
       setFavourite((prevState) => {
@@ -146,26 +164,13 @@ const Home = () => {
               const splittedUrl = pokemon.url.split('/');
               const pokemonId = splittedUrl[splittedUrl.length - 2];
               return (
-                <PokemonContainer key={index}>
-                  <Link to={`/pokemon/${pokemonId}`}>
-                    <PokemonImgContainer>
-                      <PokemonImg alt="img" src={`${urlImg}/${pokemonId}.png`} />
-                    </PokemonImgContainer>
-                  </Link>
-                  <InfoContainer>
-                      <Name>{pokemon.name}</Name>
-                      <Tooltip title="ADD TO FAVS" arrow>
-                        <FavButton onClick={(e) => handleFavourite(pokemon, e)} name={pokemon.name}>
-                          {
-                            !swtichImage 
-                            ? <Favourite alt="empty heart" src={emptyHeart} />
-                            :  <Favourite alt="heart" src={heart} />
-                          } 
-                        </FavButton>
-                      </Tooltip>
-                  </InfoContainer>   
-                </PokemonContainer>
-              )  
+                <PokemonCard
+                  id={pokemonId}
+                  key={index}
+                  pokemonSelected={pokemon}
+                  handleFavourite={handleFavourite}
+                />
+              )
             })
           }
           {

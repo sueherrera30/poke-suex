@@ -1,22 +1,36 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
+// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { Context } from '../../context/index';
 import { LittleImg, Container, stylesLink, MainContainer } from '../Details/components/index';
-import {
-  PokemonImgContainer, InfoContainer,
-  PokemonImg, Name, PokemonContainer,
-} from '../Home/components/index'
-
-const jigglypuff = '../../../assets/jigglypuff.png';
+import PokemonCard from '../Home/components/PokemonCard';
 
 const Favorites = () => {
-    const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
-    // const chemsImg = '../../../assets/cheems.png';
+    const jigglypuff = '../../../assets/jigglypuff.png';
 
-    const { state } = useContext(Context);
+    const { state,  dispatch } = useContext(Context);
+    const [swtichImage, setSwtichImage] = useState(true);
     const { favourites } = state;
+
+    const deleteFromFavs = () => {
+      console.log('bye');
+      if(swtichImage) {
+        setSwtichImage(false);
+      }
+      // let savedFavourites = [...favourites];
+      // savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+      // setFavourite((prevState) => {
+      //   dispatch({
+      //     type: 'FAVOURITES',
+      //     payload: {
+      //     ...state,
+      //     favourites: savedFavourites,
+      //     }
+      //   });
+      //   return [...prevState, {...state.favourites}]
+      // });
+    }
   return (
     <>
     <Link to="/" style={stylesLink}>
@@ -24,7 +38,6 @@ const Favorites = () => {
         <LittleImg alt="back icon" src={jigglypuff}/>
     </Link>
     <Container>
-        <Link to="/">favs</Link>  
         <MainContainer
           style={{
             flexDirection: 'row',
@@ -34,40 +47,23 @@ const Favorites = () => {
           }}
           >
         {
-          !favourites ? <p>Not favs, sorry!</p>
+          favourites.length === 0 ? <h1>Not favs yet, sorry!</h1>
           : favourites.map(pokemon => {
               const splittedUrl = pokemon.url.split('/');
               const pokemonId = splittedUrl[splittedUrl.length - 2];
               return (
-                <PokemonContainer key={pokemonId}>
-                  <Link to={`/pokemon/${pokemonId}`}>
-                    <PokemonImgContainer>
-                      <PokemonImg alt="img" src={`${urlImg}/${pokemonId}.png`} />
-                    </PokemonImgContainer>
-                  </Link>
-                  <InfoContainer>
-                      <Name>{pokemon.name}</Name>
-                      {/* <Tooltip title="ADD TO FAVS" arrow>
-                        <FavButton onClick={(e) => handleFavourite(pokemon)} name={pokemon.name}>
-                          {
-                            !favouriteHeartState 
-                            ? <Favourite alt="empty heart" src={emptyHeart} />
-                            :  <Favourite alt="heart" src={heart} />
-                          } 
-                        </FavButton>
-                      </Tooltip> */}
-                  </InfoContainer>   
-                </PokemonContainer>
+                <PokemonCard
+                id={pokemonId}
+                pokemonSelected={pokemon}
+                handleFavourite={deleteFromFavs}
+                heartState={swtichImage}
+              />
               )  
             })
-          } */}
+          }
         </MainContainer> 
     </Container>
     </>
   );
 }
-
-Favorites.propTypes = {
-    informationUrl: PropTypes.string.isRequired
-  };
 export default Favorites;
