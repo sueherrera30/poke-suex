@@ -92,132 +92,33 @@ const Home = () => {
   const handleFavourite = (pokemonSelected, setSwtichImage, swtichImage ) => {
     if(!swtichImage) {
       setSwtichImage(true);
-      console.log('holiiiii');
-      // setFavourite((prevState) => {
-      //   dispatch({
-      //     type: 'FAVOURITES',
-      //     payload: {
-      //     ...state,
-      //     favourites: [...state.favourites, pokemonSelected],
-      //     }
-      //   });
-      //   return [...prevState, {...state.favourites}];
-      // });
+      setFavourite((prevState) => {
+        dispatch({
+          type: 'FAVOURITES',
+          payload: {
+          ...state,
+          favourites: [...state.favourites, pokemonSelected],
+          }
+        });
+        return [...prevState, {...state.favourites}];
+      });
     } 
     else {
       setSwtichImage(false);
-      console.log('byeee');
-    //   let savedFavourites = [...favourites];
-    //   savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-    //   setFavourite((prevState) => {
-    //     dispatch({
-    //       type: 'FAVOURITES',
-    //       payload: {
-    //       ...state,
-    //       favourites: savedFavourites,
-    //       }
-    //     });
-    //     return [...prevState, {...state.favourites}]
-    //   });
+      let savedFavourites = [...favourites];
+      savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+      setFavourite((prevState) => {
+        dispatch({
+          type: 'FAVOURITES',
+          payload: {
+          ...state,
+          favourites: savedFavourites,
+          }
+        });
+        return [...prevState, {...state.favourites}]
+      });
     }   
   };
-
-
-  // SAVED
-   // const handleFavourite = (pokemonSelected, e) => {
-  //   if(!swtichImage) {
-  //     setSwtichImage(true); 
-  //     setFavourite((prevState) => {
-  //       dispatch({
-  //         type: 'FAVOURITES',
-  //         payload: {
-  //         ...state,
-  //         favourites: [...state.favourites, pokemonSelected],
-  //         }
-  //       });
-  //       return [...prevState, {...state.favourites}];
-  //     });
-  //   } else {
-  //     setSwtichImage(false); 
-  //     let savedFavourites = [...favourites];
-  //     savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-  //     setFavourite((prevState) => {
-  //       dispatch({
-  //         type: 'FAVOURITES',
-  //         payload: {
-  //         ...state,
-  //         favourites: savedFavourites,
-  //         }
-  //       });
-  //       return [...prevState, {...state.favourites}]
-  //     });
-  //   }   
-  // };
-
-  // current:
-  // const handleFavourite = (pokemonSelected, e) => {
-  //   if(!swtichImage) {
-  //     setSwtichImage(true); 
-  //     setFavourite((prevState) => {
-  //       dispatch({
-  //         type: 'FAVOURITES',
-  //         payload: {
-  //         ...state,
-  //         favourites: [...state.favourites, pokemonSelected],
-  //         }
-  //       });
-  //       return [...prevState, {...state.favourites}];
-  //     });
-  //   } else {
-  //     setSwtichImage(false); 
-  //     let savedFavourites = [...favourites];
-  //     savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-  //     setFavourite((prevState) => {
-  //       dispatch({
-  //         type: 'FAVOURITES',
-  //         payload: {
-  //         ...state,
-  //         favourites: savedFavourites,
-  //         }
-  //       });
-  //       return [...prevState, {...state.favourites}]
-  //     });
-  //   }   
-  // };
-
-  // experimental 
-  // const handleFavourite = (pokemonSelected) => {
-  //   if(!swtichImage) {
-  //   setSwtichImage(true)
-  //   setFavourite((prevState) => {
-  //       dispatch({
-  //         type: 'FAVOURITES',
-  //         payload: {
-  //         ...state,
-  //         favourites: [...state.favourites, pokemonSelected],
-  //         }
-  //       });
-  //       return [...prevState, {...state.favourites}];;
-  //     });
-      //state.favourites.filter(fav => fav.name === pokemonSelected.name ? setSwtichImage(true) : setSwtichImage(false)) 
-    // }
-    // else {
-    //   setSwtichImage(false); 
-    //   let savedFavourites = [...favourites];
-    //   savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-    //   setFavourite((prevState) => {
-    //     dispatch({
-    //       type: 'FAVOURITES',
-    //       payload: {
-    //       ...state,
-    //       favourites: savedFavourites,
-    //       }
-    //     });
-    //     return [...prevState, {...state.favourites}]
-    //   });
-    // }   
-  // };
-
   return (
     <>
       <SearchContainer>
