@@ -15,7 +15,21 @@ const Favorites = () => {
 
     const deleteFromFavs = () => {
       console.log('bye');
-      setSwtichImage(false);
+      if(swtichImage) {
+        setSwtichImage(false);
+      }
+      // let savedFavourites = [...favourites];
+      // savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+      // setFavourite((prevState) => {
+      //   dispatch({
+      //     type: 'FAVOURITES',
+      //     payload: {
+      //     ...state,
+      //     favourites: savedFavourites,
+      //     }
+      //   });
+      //   return [...prevState, {...state.favourites}]
+      // });
     }
   return (
     <>

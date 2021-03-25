@@ -90,6 +90,7 @@ const Home = () => {
           payload: {
           ...state,
           favourites: [...state.favourites, pokemonSelected],
+          // favourites: state.favourites.includes(pokemonSelected) ? [...state.favourites] : [...state.favourites, pokemonSelected],
           }
         });
         return [...prevState, {...state.favourites}];
