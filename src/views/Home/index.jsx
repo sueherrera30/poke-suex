@@ -3,7 +3,7 @@ import React, { useState, useContext, useEffect } from 'react';
 
 import {
   MainContainer, Name,SearchContainer,
-  SearchText, Pokeball, Input, ErrorContainer,
+  SearchText, Pokeball, Input, LoadingContainer,
   LoaderContainer,LoadingImg,
 } from './components'
 import PokemonCard from './components/PokemonCard';
@@ -18,19 +18,12 @@ const Home = () => {
 
   const [searchPokemon, setSearchPokemon] = useState('');
   const [favourites, setFavourite] = useState([]);
-  // const [currentPokemons, setCurrentPokemons] = useState([]);
-  // const [swtichImage, setSwtichImage] = useState(false);
-
-  const perPage = 6;
- 
-  
   const { state ,dispatch } = useContext(Context);
   const { data, loading, after, more } = state;
-
+  const perPage = 6; 
 
 
   const fetchedPokemons = useFetch(pokeApi, {});
-
 
   useEffect(() => {
     dispatch({
@@ -45,10 +38,10 @@ const Home = () => {
   if (!fetchedPokemons.response) {
     return (
       <MainContainer>
-        <ErrorContainer>
-          Internet has anxiety - esto debe ser loading
+        <LoadingContainer>
+          Internet has anxiety - this is loading
           <img alt="img" src={chemsImg} />
-        </ErrorContainer>
+        </LoadingContainer>
       </MainContainer>
     )
   }
