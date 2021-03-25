@@ -66,8 +66,4 @@ const Favorites = () => {
     </>
   );
 }
-
-// Favorites.propTypes = {
-//     informationUrl: PropTypes.string.isRequired
-//   };
 export default Favorites;
