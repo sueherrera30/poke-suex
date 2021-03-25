@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-
 import {
   MainContainer, Name,SearchContainer,
   SearchText, Pokeball, Input, LoadingContainer,
@@ -24,7 +23,7 @@ const Home = () => {
 
 
   const fetchedPokemons = useFetch(pokeApi, {});
-
+ 
   useEffect(() => {
     dispatch({
       type: 'START',
@@ -112,6 +111,7 @@ const Home = () => {
       });
     }   
   };
+
   return (
     <>
       <SearchContainer>
@@ -138,7 +138,7 @@ const Home = () => {
                   pokemonSelected={pokemon}
                   handleFavourite={handleFavourite}
                 />
-              )  
+              )
             })
           }
           {

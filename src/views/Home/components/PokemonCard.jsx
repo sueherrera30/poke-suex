@@ -8,8 +8,8 @@ import {
     InfoContainer,Favourite, FavButton, 
   } from '../components';
 
-const PokemonCard = ({ id, pokemonSelected, handleFavourite }) => {
-    const [swtichImage, setSwtichImage] = useState(false);
+const PokemonCard = ({ id, pokemonSelected, handleFavourite, heartState }) => {
+    const [swtichImage, setSwtichImage] = useState(heartState);
     const emptyHeart = '../../../assets/like.png';
     const heart = '../../../assets/heart.png';
     const urlImg = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
