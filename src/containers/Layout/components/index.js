@@ -19,6 +19,20 @@ const Header = styled.div`
         height: 300px;
     }
 `;
+const Counter = styled.div`
+display: flex;
+width: 15px;
+height: 15px;
+border-radius: 50%;
+justify-content: center;
+align-items: center;
+position: relative;
+top: -10px;
+right: 15px;
+background: white;
+color: red;
+font-size: 10px;
+`;
  const FavsContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -91,6 +105,6 @@ const NameLink = styled.a`
     }
 `;
 export {
-    Container, Header, FooterText, NameLink,
+    Container, Header, FooterText, NameLink, Counter,
     Footer, Content, Logo, ImgFooter, FavsContainer,
 };
