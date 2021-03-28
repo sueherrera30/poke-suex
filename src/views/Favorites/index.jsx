@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 // import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -10,46 +10,20 @@ const Favorites = () => {
     const jigglypuff = '../../../assets/jigglypuff.png';
 
     const { state,  dispatch } = useContext(Context);
-    const [swtichImage, setSwtichImage] = useState(true);
     const { favourites } = state;
-
-    // const handleFavourite = (pokemonSelected, setSwtichImage, swtichImage ) => {
-    //   if(!swtichImage) {
-    //     setSwtichImage(true);
-    //     setFavourite((prevState) => {
-    //       dispatch({
-    //         type: 'FAVOURITES',
-    //         payload: {
-    //         ...state,
-    //         favourites: [...state.favourites, pokemonSelected],
-    //         // favourites: state.favourites.includes(pokemonSelected) ? [...state.favourites] : [...state.favourites, pokemonSelected],
-    //         }
-    //       });
-    //       return [...prevState, {...state.favourites}];
-    //     });
-    //   } 
-    //   else {
-    //     setSwtichImage(false);
-    //     let savedFavourites = [...favourites];
-    //     savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-    //     setFavourite((prevState) => {
-    //       dispatch({
-    //         type: 'FAVOURITES',
-    //         payload: {
-    //         ...state,
-    //         favourites: savedFavourites,
-    //         }
-    //       });
-    //       return [...prevState, {...state.favourites}]
-    //     });
-    //   }   
-    // };
     
     const deleteFromFavs = (pokemonSelected, setSwtichImage, swtichImage) => {
       if(swtichImage) {
         setSwtichImage(false);
-      } else {
-        setSwtichImage(true);
+          let saved = [...state.favourites];
+          const leftPokemons = saved.filter(fav => fav !== pokemonSelected);
+          dispatch({
+            type: 'FAVOURITES',
+            payload: {
+            ...state,
+            favourites: leftPokemons,
+            }
+          });
       }
     };
 
