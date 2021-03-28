@@ -90,7 +90,6 @@ const Home = () => {
           payload: {
           ...state,
           favourites: [...state.favourites, pokemonSelected],
-          // favourites: state.favourites.includes(pokemonSelected) ? [...state.favourites] : [...state.favourites, pokemonSelected],
           }
         });
         return [...prevState, {...state.favourites}];
@@ -98,19 +97,19 @@ const Home = () => {
     } 
     else {
       setSwtichImage(false);
-      let savedFavourites = [...favourites];
-      savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
       setFavourite((prevState) => {
+        let saved = [...state.favourites];
+        const leftPokemons = saved.filter(fav => fav !== pokemonSelected);
         dispatch({
           type: 'FAVOURITES',
           payload: {
           ...state,
-          favourites: savedFavourites,
+          favourites: leftPokemons,
           }
         });
-        return [...prevState, {...state.favourites}]
+        return [...prevState, {...state.favourites}];
       });
-    }   
+    }
   };
 
   return (
