@@ -20,6 +20,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
 const MainContainer = styled.div`
     display: flex;
     width: 60%;
@@ -30,17 +31,16 @@ const MainContainer = styled.div`
     justify-content: space-between;
     position: relative;
 `;
-const ErrorContainer = styled.h1`
+const DataInformation = styled.h1`
     color: #f3d67b;
-    font-size: 20px;
-    width: 80%;
+    font-size: 40px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-transform: capitalize;
     font-family: 'DotGothic16', sans-serif;
-    height: 100vh;
 `;
 const LittleImg = styled.img`
     width: 35px;
@@ -225,5 +225,5 @@ export {
     TitleInfo, Information, LittleImg,
     DecorationGameContainer,
     ImgSpriteContainer, ImgSprite, MainImgContainer,
-    MainImg, Text, ErrorContainer, stylesLink,
+    MainImg, Text, DataInformation, stylesLink,
 };

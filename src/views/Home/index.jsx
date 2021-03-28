@@ -137,6 +137,7 @@ const Home = () => {
                   key={index}
                   pokemonSelected={pokemon}
                   handleFavourite={handleFavourite}
+                  heartState={false}
                 />
               )
             })

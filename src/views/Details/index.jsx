@@ -5,7 +5,7 @@ import {
     Icon, InfoContainer, TitleInfo, Information, Container,
     MainImgContainer, MainImg,DecorationGameContainer,
     ImgSpriteContainer, ImgSprite, InformationList, Text,
-    ErrorContainer, LittleImg, stylesLink,
+    DataInformation, LittleImg, stylesLink,
 } from './components';
 
 import useFetch from '../../hooks/useFetch'; 
@@ -33,10 +33,10 @@ const Details = () => {
         <Container>
         {
             !response ? (
-                <ErrorContainer>
-                    <h1>Internet has anxiety</h1>
+                <DataInformation>
+                    Internet has anxiety
                     <img alt="img" src={chemsImg} />
-                </ErrorContainer>
+                </DataInformation>
             ) : (
                 <MainContainer>
                     <NameContainer>
