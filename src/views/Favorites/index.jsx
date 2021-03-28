@@ -13,24 +13,46 @@ const Favorites = () => {
     const [swtichImage, setSwtichImage] = useState(true);
     const { favourites } = state;
 
-    const deleteFromFavs = () => {
-      console.log('bye');
+    // const handleFavourite = (pokemonSelected, setSwtichImage, swtichImage ) => {
+    //   if(!swtichImage) {
+    //     setSwtichImage(true);
+    //     setFavourite((prevState) => {
+    //       dispatch({
+    //         type: 'FAVOURITES',
+    //         payload: {
+    //         ...state,
+    //         favourites: [...state.favourites, pokemonSelected],
+    //         // favourites: state.favourites.includes(pokemonSelected) ? [...state.favourites] : [...state.favourites, pokemonSelected],
+    //         }
+    //       });
+    //       return [...prevState, {...state.favourites}];
+    //     });
+    //   } 
+    //   else {
+    //     setSwtichImage(false);
+    //     let savedFavourites = [...favourites];
+    //     savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
+    //     setFavourite((prevState) => {
+    //       dispatch({
+    //         type: 'FAVOURITES',
+    //         payload: {
+    //         ...state,
+    //         favourites: savedFavourites,
+    //         }
+    //       });
+    //       return [...prevState, {...state.favourites}]
+    //     });
+    //   }   
+    // };
+    
+    const deleteFromFavs = (pokemonSelected, setSwtichImage, swtichImage) => {
       if(swtichImage) {
         setSwtichImage(false);
+      } else {
+        setSwtichImage(true);
       }
-      // let savedFavourites = [...favourites];
-      // savedFavourites = savedFavourites.filter((pokemonDeleted) => pokemonDeleted.id !== pokemonSelected.id);
-      // setFavourite((prevState) => {
-      //   dispatch({
-      //     type: 'FAVOURITES',
-      //     payload: {
-      //     ...state,
-      //     favourites: savedFavourites,
-      //     }
-      //   });
-      //   return [...prevState, {...state.favourites}]
-      // });
-    }
+    };
+
   return (
     <>
     <Link to="/" style={stylesLink}>
@@ -56,7 +78,7 @@ const Favorites = () => {
                 id={pokemonId}
                 pokemonSelected={pokemon}
                 handleFavourite={deleteFromFavs}
-                heartState={swtichImage}
+                heartState={true}
               />
               )  
             })
