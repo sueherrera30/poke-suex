@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { Context } from '../../context/index';
-import { LittleImg, Container, stylesLink, MainContainer } from '../Details/components/index';
+import { LittleImg, Container, stylesLink, MainContainer, DataInformation } from '../Details/components/index';
 import PokemonCard from '../Home/components/PokemonCard';
 
 const Favorites = () => {
@@ -24,6 +23,8 @@ const Favorites = () => {
             favourites: leftPokemons,
             }
           });
+      } else {
+        setSwtichImage(true);
       }
     };
 
@@ -43,7 +44,7 @@ const Favorites = () => {
           }}
           >
         {
-          favourites.length === 0 ? <h1>Not favs yet, sorry!</h1>
+          favourites.length === 0 ? <DataInformation>Not favs yet, sorry!</DataInformation>
           : favourites.map(pokemon => {
               const splittedUrl = pokemon.url.split('/');
               const pokemonId = splittedUrl[splittedUrl.length - 2];
@@ -52,7 +53,7 @@ const Favorites = () => {
                 id={pokemonId}
                 pokemonSelected={pokemon}
                 handleFavourite={deleteFromFavs}
-                heartState={true}
+                heartState
               />
               )  
             })

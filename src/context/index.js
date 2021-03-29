@@ -6,6 +6,7 @@ const initialState = {
   data: [],
   after: 0,
   favourites: [],
+  selectedFav: false,
 };
 
 const Context = createContext();
@@ -18,6 +19,8 @@ const reducer = (state, action) => {
        return {...state,  ...action.payload}
     case 'FAVOURITES':
     return {...state,  ...action.payload}
+    case 'SELECTED_FAV':
+      return {...state,  ...action.payload}
     default: 
       throw new Error('internet is broken')
   }

@@ -28,6 +28,9 @@ const PokemonContainer = styled.div`
     align-items: center;
     text-decoration: unset;
    }
+   @media screen and (max-width: 425px) {
+    width: 100%;
+}
 `;
 const PokemonImgContainer = styled.div`
     width: 200px;
