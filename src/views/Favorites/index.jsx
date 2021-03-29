@@ -23,6 +23,8 @@ const Favorites = () => {
             favourites: leftPokemons,
             }
           });
+      } else {
+        setSwtichImage(true);
       }
     };
 
@@ -51,7 +53,7 @@ const Favorites = () => {
                 id={pokemonId}
                 pokemonSelected={pokemon}
                 handleFavourite={deleteFromFavs}
-                heartState={true}
+                heartState
               />
               )  
             })

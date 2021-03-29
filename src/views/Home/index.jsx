@@ -97,9 +97,9 @@ const Home = () => {
     } 
     else {
       setSwtichImage(false);
+      let saved = [...state.favourites];
+      const leftPokemons = saved.filter(fav => fav !== pokemonSelected);
       setFavourite((prevState) => {
-        let saved = [...state.favourites];
-        const leftPokemons = saved.filter(fav => fav !== pokemonSelected);
         dispatch({
           type: 'FAVOURITES',
           payload: {
@@ -137,7 +137,7 @@ const Home = () => {
                   key={index}
                   pokemonSelected={pokemon}
                   handleFavourite={handleFavourite}
-                  heartState={false}
+                  heartState={state.selectedFav}
                 />
               )
             })
