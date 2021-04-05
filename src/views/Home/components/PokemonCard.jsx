@@ -1,4 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { 
+    useState,
+    // useContext,
+ } from 'react';
 import { Link } from 'react-router-dom';
 // import { Tooltip } from '@material-ui/core';
 
@@ -7,10 +10,10 @@ import {
     PokemonImg, Name, PokemonContainer,
     InfoContainer,Favourite, FavButton, 
   } from '../components';
-  import { Context } from '../../../context/index';
+//   import { Context } from '../../../context/index';
 
 const PokemonCard = ({ id, pokemonSelected, handleFavourite, heartState }) => {
-    const { state } = useContext(Context);
+    // const { state } = useContext(Context);
     const [swtichImage, setSwtichImage] = useState(heartState);
     const emptyHeart = '../../../assets/like.png';
     const heart = '../../../assets/heart.png';

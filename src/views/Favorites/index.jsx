@@ -13,6 +13,7 @@ const Favorites = () => {
     
     const deleteFromFavs = (pokemonSelected, setSwtichImage, swtichImage) => {
       if(swtichImage) {
+        debugger;
         setSwtichImage(false);
           let saved = [...state.favourites];
           const leftPokemons = saved.filter(fav => fav !== pokemonSelected);

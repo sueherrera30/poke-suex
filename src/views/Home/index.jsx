@@ -32,6 +32,7 @@ const Home = () => {
         data: (fetchedPokemons?.response?.results || [] ).slice(0, perPage),
       },
     });
+ // eslint-disable-next-line react-hooks/exhaustive-deps
  }, [fetchedPokemons.response]);
 
   if (!fetchedPokemons.response) {
@@ -58,7 +59,6 @@ const Home = () => {
     setTimeout(() => {
       const newLoadedPokemons = pokemons.slice(after, after + perPage);
       const currentLoadedPokemons = [...state.data, ...newLoadedPokemons]
-      console.log('currentLoadedPokemons', currentLoadedPokemons);
       dispatch({
         type: 'LOADED',
         payload: {
@@ -96,6 +96,7 @@ const Home = () => {
       });
     } 
     else {
+      console.log(favourites);
       setSwtichImage(false);
       let saved = [...state.favourites];
       const leftPokemons = saved.filter(fav => fav !== pokemonSelected);
